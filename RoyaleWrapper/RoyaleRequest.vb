@@ -50,7 +50,7 @@ Public Class RoyaleRequest
     ''' <returns>Player</returns>
     Public Function GetPlayerByTag(ByVal tag As String) As Player
         Dim player As Player
-        Dim request As HttpWebRequest = CreateNewRequest(BASE_URL + "player/")
+        Dim request As HttpWebRequest = CreateNewRequest(BASE_URL + "player/" + tag)
         Dim response As WebResponse = request.GetResponse()
         Dim reader As StreamReader = New StreamReader(response.GetResponseStream(), Encoding.UTF8)
         Dim jsonString As String = reader.ReadToEnd()
@@ -85,6 +85,7 @@ Public Class RoyaleRequest
         headers.Add("auth: Bearer " + API_KEY)
         Dim request As HttpWebRequest = WebRequest.Create(URL)
         request.Method = Method
+        request.Headers = headers
         Return request
     End Function
 
